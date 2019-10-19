@@ -1,13 +1,39 @@
 import React, { useState } from "react";
 import { Header, UserInfo, Ranking } from "./components";
+import axios from "axios";
+import dotenv from "dotenv";
+import "./App.css";
+dotenv.config();
 
 const App = () => {
-  const [value, setValue] = useState(0);
+  const [userName, setUserName] = useState("");
+  const [userState, setState] = useState({
+    name: userName,
+    repo: 0,
+    star: 0
+  });
+
+  const inputHandler = e => {
+    setUserName(e.target.value);
+  };
+
+  const clickHandler = async () => {
+    const repoApi = `https://api.github.com/users/${userName}/repos`;
+    const repos = await axios.get(repoApi);
+
+    setState({
+      name: userName,
+      repo: repos.length,
+      star: repos.reduce(
+        (acc, cur) => acc.stargazers_count + cur.stargazers_count
+      )
+    });
+  };
 
   return (
     <div className="App">
-      <Header />
-      <UserInfo />
+      <Header inputHandler={inputHandler} clickHandler={clickHandler} />
+      <UserInfo {...userState} />
       <Ranking />
     </div>
   );
