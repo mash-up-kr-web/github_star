@@ -8,7 +8,7 @@ const Ranking = (props) => {
     <>
       <div />
       {ranking.map((repo) => (
-        <div>
+        <div key={repo.id}>
           <span>{repo.name}</span>
           <span>{repo.stargazers_count}</span>
         </div>

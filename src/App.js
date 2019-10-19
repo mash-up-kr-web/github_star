@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { Header, UserInfo, Ranking } from "./components";
 import axios from "axios";
-import dotenv from "dotenv";
 import "./App.css";
-dotenv.config();
 
 const App = () => {
   const [userName, setUserName] = useState("");
@@ -25,9 +23,7 @@ const App = () => {
     setState({
       name: userName,
       repo: data.length,
-      star: data.reduce(
-        (acc, cur) => acc.stargazers_count + cur.stargazers_count
-      )
+      star: data.reduce((acc, cur) => acc + cur.stargazers_count, 0)
     });
 
     setRanking(data);
