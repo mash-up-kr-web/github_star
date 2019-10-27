@@ -1,0 +1,12 @@
+export enum GitHubActionTypes {
+  REQUEST_USER_INFO = 'user/REQUEST_USER_INFO',
+  SUCCESS_USER_INFO = 'user/SUCCESS_USER_INFO',
+  FAILURE_USER_INFO = 'user/FAILURE_USER_INFO',
+  REQUEST_USER_REPO_INFO = 'user/REQUEST_USER_REPO_INFO',
+  SUCCESS_USER_REPO_INFO = 'user/SUCCESS_USER_REPO_INFO',
+  FAILURE_USER_REPO_INFO = 'user/FAILURE_USER_REPO_INFO',
+}
+
+export interface IUserParams {
+  userName: string;
+}
